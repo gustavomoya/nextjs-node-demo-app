@@ -3,7 +3,7 @@
 import {State, UpFile} from '@/app/lib/definitions';
 import Link from 'next/link';
 import { Button } from '@/app/ui/button';
-import {Field, FieldDescription, FieldError, FieldLabel} from "@/components/ui/field";
+import {Field, FieldError, FieldLabel} from "@/components/ui/field";
 import {Input} from "@/components/ui/input";
 import {useActionState} from "react";
 import { updateFile } from '@/app/lib/files/file-actions';
@@ -43,7 +43,6 @@ export default function EditFileForm({
             <Field>
               <FieldLabel htmlFor="content">File</FieldLabel>
               <Input id="content" name="content" type="file"/>
-              <FieldDescription>Select a file to upload.</FieldDescription>
               <FieldError>
                 {state.errors?.content ? state.errors.content.join(", ") : ''}
               </FieldError>

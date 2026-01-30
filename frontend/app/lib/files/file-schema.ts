@@ -7,7 +7,7 @@ const FormSchema = z.object({
         .min(1, "Name is required")
         .max(255, "Name too long"),
     size: z.number(),
-    created: z.string(),
+    created_at: z.string(),
     content: z
         .instanceof(File)
         .refine((file) => file.size > 0, "File is required")
@@ -18,9 +18,9 @@ const FormSchema = z.object({
     user_id: z.number(),
 });
 
-export const CreateFile = FormSchema.omit({ id: true, size: true,  created: true, user_id: true});
+export const CreateFile = FormSchema.omit({ id: true, size: true,  created_at: true, user_id: true});
 
-export const UpdateFile = FormSchema.omit({ id: true, size: true,  created: true, content: true, user_id: true});
+export const UpdateFile = FormSchema.omit({size: true,  created_at: true, content: true, user_id: true});
 
 
 // export const UpdateFileSchema = z.object({

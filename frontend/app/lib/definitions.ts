@@ -9,10 +9,12 @@ export type User = {
 export type UpFile = {
   id: number;
   filename: string;
+  original_name: string;
   size: number;
-  created: string;
+  created_at: string;
   content: string;
   user_id: number;
+  url: string;
 };
 
 export type State = {

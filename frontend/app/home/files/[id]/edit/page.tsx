@@ -6,15 +6,13 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import {getFile} from '@/app/lib/api';
+import {getFile} from '@/app/lib/files/file-service';
 import {UpFile} from "@/app/lib/definitions";
 
 export default async function Page(props: { params: Promise<{ id: number }> }) {
     const params = await props.params;
     const id = params.id;
     const file: UpFile = await getFile(id);
-
-    console.log(file)
 
     return (
         <div className="w-full">

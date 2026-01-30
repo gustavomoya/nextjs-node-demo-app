@@ -1,5 +1,3 @@
-'use server';
-
 import {API_URL} from "@/app/lib/api";
 
 export async function login({email, password,}: { email: string; password: string; }) {

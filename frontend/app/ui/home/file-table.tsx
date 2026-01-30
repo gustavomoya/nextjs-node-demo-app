@@ -1,6 +1,6 @@
-import { UpdateFile, DeleteFile } from '@/app/ui/files/buttons';
-import { formatDateToLocal } from '@/app/lib/utils';
-import {getFiles} from "@/app/lib/files/file-actions"
+import {UpdateFile, DeleteFile, DownloadFile} from '@/app/ui/files/buttons';
+import {formatDateToLocal, formatFileSize, getExtension} from '@/app/lib/utils';
+import {getFiles} from "@/app/lib/files/file-service"
 
 export default async function FilesTable() {
   const files =  await getFiles();
@@ -34,19 +34,20 @@ export default async function FilesTable() {
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
-                      <p>{file.filename}</p>
+                      <p>{`${file.filename}${getExtension(file.original_name)}`}</p>
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {file.size}
+                    {formatFileSize(file.size)}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {formatDateToLocal(file.created)}
+                    {formatDateToLocal(file.created_at)}
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
                       <UpdateFile id={file.id} />
                       <DeleteFile id={file.id} />
+                      <DownloadFile id={file.id} name={file.filename} originalName={file.original_name}  />
                     </div>
                   </td>
                 </tr>

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useActionState } from 'react';
 import {Button} from '@/app/ui/button';
 import {Input} from "@/components/ui/input"
-import {Field, FieldDescription, FieldError, FieldLabel} from "@/components/ui/field";
+import {Field, FieldError, FieldLabel} from "@/components/ui/field";
 import { saveFile } from '@/app/lib/files/file-actions';
 import {State} from '@/app/lib/definitions';
 
@@ -18,7 +18,9 @@ export default function Form() {
             <div className="rounded-md p-4 md:p-6">
                 <div className="mb-4">
                     <Field>
-                        <FieldLabel htmlFor="name">Name</FieldLabel>
+                        <FieldLabel htmlFor="name">
+                            Name <span className="text-destructive">*</span>
+                        </FieldLabel>
                         <Input
                             id="name"
                             name="filename"
@@ -32,9 +34,10 @@ export default function Form() {
                 </div>
                 <div className="mb-4">
                     <Field>
-                        <FieldLabel htmlFor="content">File</FieldLabel>
+                        <FieldLabel htmlFor="content">
+                            File <span className="text-destructive">*</span>
+                        </FieldLabel>
                         <Input id="content" name="content" type="file"/>
-                        <FieldDescription>Select a file to upload.</FieldDescription>
                         <FieldError>
                             {state.errors?.content ? state.errors.content.join(", ") : ''}
                         </FieldError>

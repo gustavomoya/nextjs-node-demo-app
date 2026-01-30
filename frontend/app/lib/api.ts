@@ -1,7 +1,7 @@
-import "server-only";
+// import "server-only";
 import {auth} from "@/auth";
 
-export const API_URL = process.env.API_BASE_URL;
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 if (!API_URL) {
   throw new Error("API_BASE_URL is not defined");
 }
@@ -24,9 +24,36 @@ export async function apiFetch(endpoint: string, options: RequestInit = {}) {
   });
 
   if (!res.ok) {
-    throw new Error("Error en la API");
+    throw new Error("API Error");
   }
 
   return res.json();
 }
 
+export async function apiDelete(endpoint: string) {
+  const session = await auth();
+  const token = session.accessToken ? session.accessToken : null;
+
+  const headers = {
+    "Content-Type": "application/json",
+    ...(token && { Authorization: `Bearer ${token}` }),
+  };
+
+
+  return await fetch(`${API_URL}${endpoint}`, {
+    headers,
+    method: "DELETE",
+  });
+}
+
+export async function apiDownload(endpoint: string) {
+  const session = await auth();
+  const token = session.accessToken ? session.accessToken : null;
+
+  return await fetch(`${API_URL}${endpoint}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    method: "DELETE",
+  });
+}

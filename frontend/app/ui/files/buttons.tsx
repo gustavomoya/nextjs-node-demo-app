@@ -1,6 +1,8 @@
-import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
+"use client";
+
+import {CloudArrowDownIcon, PencilIcon, PlusIcon, TrashIcon} from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { deleteFile } from '@/app/lib/files/file-actions';
+import {deleteFile} from '@/app/lib/files/file-actions';
 
 export function CreateFile() {
   return (
@@ -35,5 +37,18 @@ export function DeleteFile({ id }: { id: number }) {
           <TrashIcon className="w-5"/>
         </button>
       </form>
+  );
+}
+
+export function DownloadFile({ id, name, originalName }: { id: number; name: string; originalName: string }) {
+  const download = async () => {
+      window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/files/${id}/download`;
+  };
+
+  return (
+      <button onClick={download} className="rounded-md border p-2 hover:bg-gray-100">
+        <span className="sr-only">Download</span>
+        <CloudArrowDownIcon className="w-5"/>
+      </button>
   );
 }
