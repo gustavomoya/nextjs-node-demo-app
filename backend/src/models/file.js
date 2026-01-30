@@ -14,6 +14,10 @@ const File = sequelize.define(
             type: DataTypes.STRING(255),
             allowNull: false,
         },
+        original_name: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
+        },
         size: {
             type: DataTypes.INTEGER,
             allowNull: false,

@@ -26,6 +26,7 @@ CREATE TABLE users (
 CREATE TABLE files (
                        id INT AUTO_INCREMENT PRIMARY KEY,
                        filename VARCHAR(255) NOT NULL,
+                       original_name VARCHAR(255) NOT NULL,
                        size BIGINT NOT NULL,
                        content LONGBLOB NOT NULL,
                        user_id INT NOT NULL,
