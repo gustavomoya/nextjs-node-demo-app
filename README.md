@@ -4,7 +4,7 @@ This contains a full-stack demo system built with:
 
 ## 🧱 Tech Stack
 
-Backend: Express + MySQL + Sequelize + JWT
+Backend: Express + MySQL + Sequelize + JWT + Redis + BullMQ
 
 Frontend: Next.js 16 + Tailwind CSS + shadcn/ui
 
