@@ -3,7 +3,6 @@ import { Suspense } from 'react';
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import Link from 'next/link';
 
-
 export default function RegisterPage() {
     return (
         <main className="flex items-center justify-center md:h-screen bg-gray-50">

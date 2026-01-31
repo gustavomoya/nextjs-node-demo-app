@@ -1,6 +1,5 @@
 import FilesTable from '@/app/ui/home/file-table';
 import {CreateFile} from "@/app/ui/files/buttons";
-import {UpFile} from "@/app/lib/definitions";
 import {SkeletonCardTable} from "@/app/ui/skeletons";
 import {Suspense} from "react";
 

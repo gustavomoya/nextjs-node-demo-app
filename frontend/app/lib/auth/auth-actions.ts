@@ -8,7 +8,7 @@ import {LoginSchema, RegisterSchema} from "@/app/lib/auth/auth-schema";
 
 
 /**
- * Authenticate a user
+ * Authenticate user
  *
  * @param prevState
  * @param formData

@@ -1,11 +1,17 @@
 'use server';
 
-import {State, UpFile} from "@/app/lib/definitions";
+import {State} from "@/app/lib/definitions";
 import {revalidatePath} from "next/cache";
 import { redirect } from 'next/navigation';
 import {createFile, putFile, removeFile} from "@/app/lib/files/file-service";
 import {CreateFile, UpdateFile} from "@/app/lib/files/file-schema";
 
+/**
+ * Create a new file
+ *
+ * @param prevState
+ * @param formData
+ */
 export async function saveFile(prevState: State, formData: FormData) {
     const rawFormData = {
         filename: formData.get('filename'),
@@ -33,6 +39,13 @@ export async function saveFile(prevState: State, formData: FormData) {
     redirect('/home');
 }
 
+/**
+ * Update a file
+ *
+ * @param id
+ * @param prevState
+ * @param formData
+ */
 export async function updateFile(id: number, prevState: State, formData: FormData) {
     const rawFormData = {
         id: id,
@@ -69,9 +82,12 @@ export async function updateFile(id: number, prevState: State, formData: FormDat
     redirect('/home');
 }
 
+/**
+ * Remove a file
+ *
+ * @param id the file id
+ */
 export async function deleteFile(id: number) {
-    console.log(id);
-
     await removeFile(id);
 
     revalidatePath('/home');

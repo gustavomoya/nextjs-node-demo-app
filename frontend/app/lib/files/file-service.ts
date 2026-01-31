@@ -12,12 +12,6 @@ export async function getFile(id: number) {
         method: "GET",
     });
 }
-
-
-// export async function getFileUrl(fileId: number, name: string, originalName: string) {
-//     return `${process.env.API_BASE_URL}/files/${fileId}/download`;
-// }
-
 export async function createFile({filename, content, }: { filename: string; content: File; }) {
     const session = await auth();
     const token = session.accessToken ? session.accessToken : null;
