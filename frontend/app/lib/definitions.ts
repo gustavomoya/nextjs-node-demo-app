@@ -13,6 +13,7 @@ export type UpFile = {
   size: number;
   created_at: string;
   content: string;
+  status: string;
   user_id: number;
   url: string;
 };

@@ -32,7 +32,7 @@ export function SkeletonTable() {
 
 export function SkeletonCardTable() {
     return (
-        <div className="w-full">
+        <div className="w-full mt-5">
             <Card className="w-full">
                 <CardContent>
                     <SkeletonTable/>
