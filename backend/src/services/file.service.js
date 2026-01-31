@@ -10,7 +10,7 @@ const File = require("../models/file");
 exports.listFilesByUser = async (userId) => {
     return File.findAll({
         where: { user_id: userId },
-        attributes: ["id", "filename", "original_name", "size", "created_at"],
+        attributes: ["id", "filename", "original_name", "size", "status", "created_at"],
         order: [["created_at", "DESC"]],
     });
 };
@@ -66,6 +66,7 @@ exports.createFile = async ({ userId, filename, file }) => {
         original_name: file.originalname,
         size: file.buffer.length,
         content: file.buffer,
+        status: "processing",
         user_id: userId,
     });
 };

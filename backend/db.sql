@@ -29,6 +29,8 @@ CREATE TABLE files (
                        original_name VARCHAR(255) NOT NULL,
                        size BIGINT NOT NULL,
                        content LONGBLOB NOT NULL,
+                       zip_content LONGBLOB,
+                       status VARCHAR(255) NOT NULL,
                        user_id INT NOT NULL,
                        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
                        updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP

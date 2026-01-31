@@ -26,6 +26,15 @@ const File = sequelize.define(
             type: DataTypes.BLOB("long"),
             allowNull: false,
         },
+        zip_content: {
+            type: DataTypes.BLOB("long"),
+            allowNull: true,
+        },
+        status: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
+            defaultValue: "processing",
+        },
     },
     {
         tableName: "files",

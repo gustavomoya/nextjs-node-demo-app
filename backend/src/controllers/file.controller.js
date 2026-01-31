@@ -2,6 +2,7 @@ const fileService = require("../services/file.service")
 const {remove} = require("../services/file.service");
 const mime = require("mime-types");
 const path = require("path");
+const fileQueue = require("../queues/file.queue");
 
 /**
  * Get the list of files by user
@@ -63,6 +64,10 @@ exports.create = async (req, res, next) => {
             file: req.file,
         });
 
+        await fileQueue.add("compress", {
+            fileId: file.id,
+        });
+
         res.status(201).json({
             id: file.id,
             filename: file.filename,
@@ -94,6 +99,12 @@ exports.update = async (req, res, next) => {
             userId: req.user.id,
         });
 
+        if (req.file) {
+            await fileQueue.add("compress", {
+                fileId: file.id,
+            });
+        }
+
         res.json({
             id: file.id,
             filename: file.filename,
@@ -118,19 +129,31 @@ exports.download = async (req, res, next) => {
 
         const file = await fileService.getFileById(id);
 
-        const extension = path.extname(file.original_name);
-        const filename = `${file.filename}${extension}`;
+        if (file.zip_content) {
+            const zipName = `${file.filename}.zip`;
 
-        const mimeType =
-            mime.lookup(extension) || "application/octet-stream";
+            res.setHeader("Content-Type", "application/zip");
+            res.setHeader(
+                "Content-Disposition",
+                `attachment; filename="${zipName}"`
+            );
+            res.send(file.zip_content);
 
-        res.setHeader("Content-Type", mimeType);
-        res.setHeader(
-            "Content-Disposition",
-            `attachment; filename="${filename}"`
-        );
+        } else {
+            const extension = path.extname(file.original_name);
+            const filename = `${file.filename}${extension}`;
 
-        res.send(file.content);
+            const mimeType =
+                mime.lookup(extension) || "application/octet-stream";
+
+            res.setHeader("Content-Type", mimeType);
+            res.setHeader(
+                "Content-Disposition",
+                `attachment; filename="${filename}"`
+            );
+
+            res.send(file.content);
+        }
     } catch (err) {
         next(err);
     }

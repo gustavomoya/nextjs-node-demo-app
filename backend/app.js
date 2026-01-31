@@ -1,6 +1,8 @@
 const express = require('express')
 const cors = require("cors");
 
+const { startFileWorker } = require("./src/workers/file.worker");
+
 const app = express()
 
 app.use(cors());
@@ -15,5 +17,7 @@ app.use((err, req, res, next) => {
         message: err.message || "Internal server error",
     });
 })
+
+startFileWorker();
 
 module.exports = app;
