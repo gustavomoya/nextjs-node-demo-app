@@ -3,18 +3,32 @@ const {remove} = require("../services/file.service");
 const mime = require("mime-types");
 const path = require("path");
 
+/**
+ * Get the list of files by user
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @returns {Promise<*>}
+ */
 exports.list = async (req, res, next) => {
     try {
         const files = await fileService.listFilesByUser(req.user.id);
 
         res.status(200).json(files);
     } catch (err) {
-        console.log(err);
-
         return res.status(500).json(false);
     }
 }
 
+/**
+ * Get a file
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @returns {Promise<*>}
+ */
 exports.getFile = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -23,12 +37,18 @@ exports.getFile = async (req, res, next) => {
 
         res.status(200).json(file);
     } catch (err) {
-        console.log(err);
-
         return res.status(500).json(false);
     }
 }
 
+/**
+ * Create a new file
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @returns {Promise<*>}
+ */
 exports.create = async (req, res, next) => {
     try {
         const { name } = req.body;
@@ -50,13 +70,18 @@ exports.create = async (req, res, next) => {
         });
 
     } catch (err) {
-        console.log(err);
-
         return res.status(500).json(false);
     }
 };
 
-
+/**
+ * Update a file
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @returns {Promise<*>}
+ */
 exports.update = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -79,6 +104,14 @@ exports.update = async (req, res, next) => {
     }
 };
 
+/**
+ * Download a file
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @returns {Promise<void>}
+ */
 exports.download = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -103,6 +136,13 @@ exports.download = async (req, res, next) => {
     }
 };
 
+/**
+ * Remove a file
+ *
+ * @param req
+ * @param res
+ * @returns {Promise<*>}
+ */
 exports.deleteFile = async (req, res) => {
     try {
         const {id} = req.params;
